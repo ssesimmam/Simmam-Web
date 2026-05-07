@@ -41,9 +41,12 @@ type HouseScore = {
   points: number;
   color: string;
   accent: string;
+  breakdown: { winners: number; runners: number; participation: number };
 };
 
 export function DashboardLiveScores() {
+  const [selectedHouse, setSelectedHouse] = useState<string | null>(null);
+
   const [houseScores, setHouseScores] = useState<HouseScore[]>(() => 
     houses
       .map((h) => ({
@@ -53,6 +56,7 @@ export function DashboardLiveScores() {
         points: h.points2025,
         color: h.accent,
         accent: h.accent,
+        breakdown: { ...h.breakdown },
       }))
       .sort((a, b) => b.points - a.points)
   );
@@ -61,7 +65,17 @@ export function DashboardLiveScores() {
     const id = setInterval(() => {
       setHouseScores((prev) =>
         [...prev]
-          .map((s) => ({ ...s, points: s.points + Math.floor(Math.random() * 8) }))
+          .map((s) => {
+            const added = Math.floor(Math.random() * 8);
+            return {
+              ...s,
+              points: s.points + added,
+              breakdown: {
+                ...s.breakdown,
+                winners: s.breakdown.winners + added, // add random points to winners to balance
+              },
+            };
+          })
           .sort((a, b) => b.points - a.points)
       );
     }, 2200);
@@ -69,6 +83,7 @@ export function DashboardLiveScores() {
   }, []);
 
   const max = Math.max(...houseScores.map((s) => s.points));
+  const selectedHouseData = houseScores.find((h) => h.name === selectedHouse);
 
   return (
     <section id="dashboard" className="relative py-24 md:py-32">
@@ -146,91 +161,130 @@ export function DashboardLiveScores() {
           <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[var(--crimson)]/30 blur-3xl" />
           <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[var(--gold)]/30 blur-3xl" />
 
-          <div className="relative flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2">
-              <span className="relative flex w-2.5 h-2.5">
-                <span className="absolute inset-0 rounded-full bg-red-500 animate-ping" />
-                <span className="relative w-2.5 h-2.5 rounded-full bg-red-500" />
-              </span>
-              <span className="text-xs tracking-[0.3em] text-gold/80">LIVE • HOUSE RANKINGS</span>
+            <div className="relative flex items-center justify-between mb-8">
+              <div className="flex items-center gap-2">
+                <span className="relative flex w-2.5 h-2.5">
+                  <span className="absolute inset-0 rounded-full bg-red-500 animate-ping" />
+                  <span className="relative w-2.5 h-2.5 rounded-full bg-red-500" />
+                </span>
+                <span className="text-xs tracking-[0.3em] text-gold/80">LIVE • HOUSE RANKINGS</span>
+              </div>
+              <div className="flex items-center gap-4 text-xs text-foreground/60">
+                <span className="inline-flex items-center gap-1">
+                  <Activity className="w-3.5 h-3.5 text-gold" /> Auto-sync
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <TrendingUp className="w-3.5 h-3.5 text-gold" /> Rising
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-4 text-xs text-foreground/60">
-              <span className="inline-flex items-center gap-1">
-                <Activity className="w-3.5 h-3.5 text-gold" /> Auto-sync
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <TrendingUp className="w-3.5 h-3.5 text-gold" /> Rising
-              </span>
-            </div>
-          </div>
 
-          <div className="relative space-y-4">
-            {houseScores.map((house, i) => (
-              <div key={house.name} className="relative">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-3">
-                    <span className="font-display text-lg text-gold w-6">
-                      {String(i + 1).padStart(2, "0")}
+            <div className="relative space-y-4">
+              {houseScores.map((house, i) => (
+                <div 
+                  key={house.name} 
+                  className={`relative p-2 -mx-2 rounded-xl transition-colors cursor-pointer ${selectedHouse === house.name ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                  onClick={() => setSelectedHouse(house.name)}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-3">
+                      <span className="font-display text-lg text-gold w-6">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      
+                      {/* House Logo/Element */}
+                      <div
+                        className="w-10 h-10 rounded-lg flex items-center justify-center text-xl font-bold border-2"
+                        style={{
+                          backgroundColor: `${house.accent}20`,
+                          borderColor: house.accent,
+                          color: house.accent,
+                        }}
+                      >
+                        {houseElementIcons[house.element] || "🏠"}
+                      </div>
+
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-foreground">{house.name}</span>
+                        <span className="text-xs text-foreground/50">{house.element}</span>
+                      </div>
+                      
+                      {i === 0 && (
+                        <div className="flex items-center gap-1 ml-2">
+                          <Sparkles className="w-4 h-4 text-[var(--crimson-glow)] animate-pulse" />
+                          <span className="text-xs text-gold font-bold">LEADING</span>
+                        </div>
+                      )}
+                    </div>
+                    <span className="font-display text-xl tabular-nums text-gradient-gold">
+                      {house.points}
                     </span>
-                    
-                    {/* House Logo/Element */}
+                  </div>
+                  <div className="h-3 rounded-full bg-white/5 overflow-hidden">
                     <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center text-xl font-bold border-2"
+                      className="h-full rounded-full transition-all duration-700 relative"
                       style={{
-                        backgroundColor: `${house.accent}20`,
-                        borderColor: house.accent,
-                        color: house.accent,
+                        width: `${(house.points / max) * 100}%`,
+                        background: `linear-gradient(90deg, ${house.accent}, var(--gold))`,
+                        boxShadow: `0 0 20px ${house.accent}`,
                       }}
                     >
-                      {houseElementIcons[house.element] || "🏠"}
+                      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,oklch(1_0_0/0.4),transparent)] bg-[length:200%_100%] animate-[shimmer_2s_linear_infinite]" />
                     </div>
+                  </div>
 
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-foreground">{house.name}</span>
-                      <span className="text-xs text-foreground/50">{house.element}</span>
-                    </div>
-                    
-                    {i === 0 && (
-                      <div className="flex items-center gap-1 ml-2">
-                        <Sparkles className="w-4 h-4 text-[var(--crimson-glow)] animate-pulse" />
-                        <span className="text-xs text-gold font-bold">LEADING</span>
+                  {/* Inline Breakdown */}
+                  {selectedHouse === house.name && (
+                    <div className="mt-4 p-4 rounded-2xl bg-black/40 border border-white/5 animate-rise-in">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                          <div className="flex justify-between text-xs mb-1.5">
+                             <span className="text-foreground/70 uppercase tracking-wider">Winners</span>
+                             <span className="font-bold text-gold">{house.breakdown.winners}</span>
+                          </div>
+                          <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                             <div className="h-full rounded-full transition-all duration-700" style={{ width: `${(house.breakdown.winners / house.points) * 100}%`, background: house.accent }} />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-xs mb-1.5">
+                             <span className="text-foreground/70 uppercase tracking-wider">Runners</span>
+                             <span className="font-bold text-gold">{house.breakdown.runners}</span>
+                          </div>
+                          <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                             <div className="h-full rounded-full transition-all duration-700 opacity-70" style={{ width: `${(house.breakdown.runners / house.points) * 100}%`, background: house.accent }} />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-xs mb-1.5">
+                             <span className="text-foreground/70 uppercase tracking-wider">Participation</span>
+                             <span className="font-bold text-gold">{house.breakdown.participation}</span>
+                          </div>
+                          <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                             <div className="h-full rounded-full transition-all duration-700 opacity-40" style={{ width: `${(house.breakdown.participation / house.points) * 100}%`, background: house.accent }} />
+                          </div>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                  <span className="font-display text-xl tabular-nums text-gradient-gold">
-                    {house.points}
-                  </span>
-                </div>
-                <div className="h-3 rounded-full bg-white/5 overflow-hidden">
-                  <div
-                    className="h-full rounded-full transition-all duration-700 relative"
-                    style={{
-                      width: `${(house.points / max) * 100}%`,
-                      background: `linear-gradient(90deg, ${house.accent}, var(--gold))`,
-                      boxShadow: `0 0 20px ${house.accent}`,
-                    }}
-                  >
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,oklch(1_0_0/0.4),transparent)] bg-[length:200%_100%] animate-[shimmer_2s_linear_infinite]" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Legend */}
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
-              {houses.map((house) => (
-                <div key={house.name} className="flex items-center gap-2">
-                  <div
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: house.accent }}
-                  />
-                  <span className="text-foreground/70">{house.short}</span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
-          </div>
+
+            {/* Legend */}
+            <div className="mt-8 pt-6 border-t border-white/10">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+                {houses.map((house) => (
+                  <div key={house.name} className="flex items-center gap-2">
+                    <div
+                      className="w-3 h-3 rounded-full"
+                      style={{ backgroundColor: house.accent }}
+                    />
+                    <span className="text-foreground/70">{house.short}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
         </div>
       </div>
     </section>
