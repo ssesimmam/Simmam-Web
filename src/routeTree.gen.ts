@@ -14,6 +14,14 @@ import { Route as DashboardLiveRouteImport } from './routes/dashboard-live'
 import { Route as CaptainsRouteImport } from './routes/captains'
 import { Route as ArchiveGalleryRouteImport } from './routes/archive-gallery'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminParticipantsRouteImport } from './routes/admin/participants'
+import { Route as AdminLeaderboardRouteImport } from './routes/admin/leaderboard'
+import { Route as AdminHousesRouteImport } from './routes/admin/houses'
+import { Route as AdminEventsRouteImport } from './routes/admin/events'
+import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcements'
+import { Route as AdminLayoutRouteImport } from './routes/admin/_layout'
 
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
@@ -40,6 +48,46 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminParticipantsRoute = AdminParticipantsRouteImport.update({
+  id: '/admin/participants',
+  path: '/admin/participants',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLeaderboardRoute = AdminLeaderboardRouteImport.update({
+  id: '/admin/leaderboard',
+  path: '/admin/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminHousesRoute = AdminHousesRouteImport.update({
+  id: '/admin/houses',
+  path: '/admin/houses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEventsRoute = AdminEventsRouteImport.update({
+  id: '/admin/events',
+  path: '/admin/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
+  id: '/admin/announcements',
+  path: '/admin/announcements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLayoutRoute = AdminLayoutRouteImport.update({
+  id: '/admin/_layout',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +95,14 @@ export interface FileRoutesByFullPath {
   '/captains': typeof CaptainsRoute
   '/dashboard-live': typeof DashboardLiveRoute
   '/events': typeof EventsRoute
+  '/admin': typeof AdminLayoutRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/houses': typeof AdminHousesRoute
+  '/admin/leaderboard': typeof AdminLeaderboardRoute
+  '/admin/participants': typeof AdminParticipantsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +110,13 @@ export interface FileRoutesByTo {
   '/captains': typeof CaptainsRoute
   '/dashboard-live': typeof DashboardLiveRoute
   '/events': typeof EventsRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/houses': typeof AdminHousesRoute
+  '/admin/leaderboard': typeof AdminLeaderboardRoute
+  '/admin/participants': typeof AdminParticipantsRoute
+  '/admin/settings': typeof AdminSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +125,14 @@ export interface FileRoutesById {
   '/captains': typeof CaptainsRoute
   '/dashboard-live': typeof DashboardLiveRoute
   '/events': typeof EventsRoute
+  '/admin/_layout': typeof AdminLayoutRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/houses': typeof AdminHousesRoute
+  '/admin/leaderboard': typeof AdminLeaderboardRoute
+  '/admin/participants': typeof AdminParticipantsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,8 +142,28 @@ export interface FileRouteTypes {
     | '/captains'
     | '/dashboard-live'
     | '/events'
+    | '/admin'
+    | '/admin/announcements'
+    | '/admin/events'
+    | '/admin/houses'
+    | '/admin/leaderboard'
+    | '/admin/participants'
+    | '/admin/settings'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/archive-gallery' | '/captains' | '/dashboard-live' | '/events'
+  to:
+    | '/'
+    | '/archive-gallery'
+    | '/captains'
+    | '/dashboard-live'
+    | '/events'
+    | '/admin'
+    | '/admin/announcements'
+    | '/admin/events'
+    | '/admin/houses'
+    | '/admin/leaderboard'
+    | '/admin/participants'
+    | '/admin/settings'
   id:
     | '__root__'
     | '/'
@@ -80,6 +171,14 @@ export interface FileRouteTypes {
     | '/captains'
     | '/dashboard-live'
     | '/events'
+    | '/admin/_layout'
+    | '/admin/announcements'
+    | '/admin/events'
+    | '/admin/houses'
+    | '/admin/leaderboard'
+    | '/admin/participants'
+    | '/admin/settings'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -88,6 +187,14 @@ export interface RootRouteChildren {
   CaptainsRoute: typeof CaptainsRoute
   DashboardLiveRoute: typeof DashboardLiveRoute
   EventsRoute: typeof EventsRoute
+  AdminLayoutRoute: typeof AdminLayoutRoute
+  AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
+  AdminEventsRoute: typeof AdminEventsRoute
+  AdminHousesRoute: typeof AdminHousesRoute
+  AdminLeaderboardRoute: typeof AdminLeaderboardRoute
+  AdminParticipantsRoute: typeof AdminParticipantsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -127,6 +234,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/participants': {
+      id: '/admin/participants'
+      path: '/admin/participants'
+      fullPath: '/admin/participants'
+      preLoaderRoute: typeof AdminParticipantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/leaderboard': {
+      id: '/admin/leaderboard'
+      path: '/admin/leaderboard'
+      fullPath: '/admin/leaderboard'
+      preLoaderRoute: typeof AdminLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/houses': {
+      id: '/admin/houses'
+      path: '/admin/houses'
+      fullPath: '/admin/houses'
+      preLoaderRoute: typeof AdminHousesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/events': {
+      id: '/admin/events'
+      path: '/admin/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/announcements': {
+      id: '/admin/announcements'
+      path: '/admin/announcements'
+      fullPath: '/admin/announcements'
+      preLoaderRoute: typeof AdminAnnouncementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/_layout': {
+      id: '/admin/_layout'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -136,6 +299,14 @@ const rootRouteChildren: RootRouteChildren = {
   CaptainsRoute: CaptainsRoute,
   DashboardLiveRoute: DashboardLiveRoute,
   EventsRoute: EventsRoute,
+  AdminLayoutRoute: AdminLayoutRoute,
+  AdminAnnouncementsRoute: AdminAnnouncementsRoute,
+  AdminEventsRoute: AdminEventsRoute,
+  AdminHousesRoute: AdminHousesRoute,
+  AdminLeaderboardRoute: AdminLeaderboardRoute,
+  AdminParticipantsRoute: AdminParticipantsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
