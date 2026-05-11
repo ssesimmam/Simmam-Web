@@ -143,7 +143,7 @@ function CaptainsPage() {
                 { name: "M.Thiruvelan", role: "INDOOR & ATHLETICS HEAD (BOYS)", phone: "7305850025" },
                 { name: "DIVYA TEJA", role: "INDOOR & ATHLETICS HEAD (GIRLS)", phone: "7396242468" },
                 { name: "Mukesh S", role: "TECH HEAD", phone: "8807835397" },
-                { name: "MADHAN S", role: "NON-TECH HEAD", phone: "7448358124" },
+                { name: "MADHAN S", role: "NON-TECH HEAD", phone: "7418458124" },
                 { name: "Sarah glady", role: "EXTERNAL AFFAIRS HEAD", phone: "8531037372" }
               ].map((member) => (
                 <div key={member.role} className="w-full">

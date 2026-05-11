@@ -53,7 +53,7 @@ export const houses: House[] = [
     element: "Wisdom",
     points2025: 23660,
     pointsChange: -300,
-    captain: { name: "Libhika", phone: "+91 90923 02052" },
+    captain: { name: "Libika", phone: "+91 90923 02052" },
     vice: { name: "G. Sai Charitha", phone: "+91 63054 03861" },
     faculty: [
       "Dr. A. GAYATHRI",

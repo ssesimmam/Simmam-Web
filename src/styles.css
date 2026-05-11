@@ -290,3 +290,26 @@
   animation: shimmer 3s linear infinite;
 }
 
+.header-center-text {
+  display: flex;
+}
+
+.header-social-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  /* Hide the center text to make room for logos */
+  .header-center-text { 
+    display: none; 
+  }
+  
+  /* Ensure logos stay on the same line */
+  .header-social-container {
+    justify-content: center;
+    gap: 20px; /* Adjust spacing between IG and WA */
+  }
+}
+

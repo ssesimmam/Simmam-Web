@@ -50,17 +50,18 @@ export function Hero() {
       <Particles count={40} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <svg width="0" height="0" className="absolute">
+          <linearGradient id="instagram-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
+            <stop stopColor="#f09433" offset="0%" />
+            <stop stopColor="#e6683c" offset="25%" />
+            <stop stopColor="#dc2743" offset="50%" />
+            <stop stopColor="#cc2366" offset="75%" />
+            <stop stopColor="#bc1888" offset="100%" />
+          </linearGradient>
+        </svg>
+
         {/* Badge & Social Floaters */}
-        <div className="flex flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 mb-8 animate-rise-in mx-auto w-fit max-w-full">
-          <svg width="0" height="0" className="absolute">
-            <linearGradient id="instagram-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
-              <stop stopColor="#f09433" offset="0%" />
-              <stop stopColor="#e6683c" offset="25%" />
-              <stop stopColor="#dc2743" offset="50%" />
-              <stop stopColor="#cc2366" offset="75%" />
-              <stop stopColor="#bc1888" offset="100%" />
-            </linearGradient>
-          </svg>
+        <div className="header-social-container mb-8 animate-rise-in mx-auto w-fit max-w-full gap-4 sm:gap-6">
 
           <a
             href="https://www.instagram.com/ssesimam/"
@@ -71,7 +72,7 @@ export function Hero() {
             <FaInstagram style={{ fill: "url(#instagram-gradient)" }} className="w-8 h-8" />
           </a>
 
-          <div className="inline-flex items-center justify-center glass rounded-full px-5 py-2">
+          <div className="header-center-text inline-flex items-center justify-center glass rounded-full px-5 py-2">
             <span className="text-xs md:text-sm tracking-[0.3em] text-white text-center">
               SIMATS ENGINEERING CULTURALS
             </span>
