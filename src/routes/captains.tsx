@@ -102,7 +102,7 @@ function CaptainsPage() {
                 { name: "Bharath S", role: "NON-TECH SECRETARY", phone: "6379206320" },
                 { name: "Suraj Alagupandi", role: "MEDIA SECRETARY", phone: "9843974396" },
                 { name: "Siva Visagar R", role: "EXTERNAL AFFAIRS SECRETARY", phone: "6380920806" },
-                { name: "HARIRAM J K", role: "PUBLICITY & MARKETING SECRETARY" },
+                { name: "HARIRAM J K", role: "PUBLICITY & MARKETING SECRETARY", phone: "7995421514" },
                 { name: "Likitha", role: "HOSPITALITY SECRETARY", phone: "9704200759" },
                 { name: "D Navya Sree", role: "STUDENT AFFAIRS SECRETARY", phone: "9704200759" },
                 { name: "LINGESH KUMAR V", role: "DISCIPLINARY SECRETARY", phone: "7358614501" }
