@@ -42,7 +42,7 @@ const editions: Edition[] = [
   {
     year: "2024",
     title: "SIMMAM 2024 — Where Passion Met Expression",
-    champion: "Suryas",
+    champion: "Dheeras",
     headliner: "Nikki Galrani  •  Karthik",
     days: 3,
     participants: 3600,
