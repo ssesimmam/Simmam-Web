@@ -41,7 +41,7 @@ export function DashboardLiveScores() {
   const participationScores: Record<string, number> = {
     "Agniyas": 960,
     "Marutas": 1260,
-    "Rudras": 660,
+    "Rudras": 710,
     "Dhronas": 740,
     "Suryas": 1480,
     "Vajras": 590,
