@@ -117,34 +117,7 @@ export function Hero() {
           UNLEASH TALENT • UNITE DEPARTMENTS • CELEBRATE EXCELLENCE
         </p>
 
-        {/* CTAs */}
-        <div
-          className="mt-10 flex flex-wrap justify-center gap-3 md:gap-4 animate-rise-in"
-          style={{ animationDelay: ".45s" }}
-        >
-          <a
-            href="/events"
-            className="group relative inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm bg-gradient-to-r from-[var(--crimson)] to-[var(--crimson-glow)] text-white shadow-[var(--shadow-glow-red)] hover:scale-105 transition-transform"
-          >
-            <Zap className="w-4 h-4" />
-            Register Now
-            <span className="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/10 transition" />
-          </a>
-          <a
-            href="/#teams"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm glass-strong neon-border text-gold hover:bg-white/5 transition"
-          >
-            <Trophy className="w-4 h-4" />
-            Explore Teams
-          </a>
-          <a
-            href="/live-scores"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm border border-gold/40 text-gold hover:bg-gold/10 transition"
-          >
-            <Calendar className="w-4 h-4" />
-            Live Scores
-          </a>
-        </div>
+        {/* CTAs removed per request */}
 
         {/* Countdown */}
         <div className="mt-14 animate-rise-in" style={{ animationDelay: ".55s" }}>

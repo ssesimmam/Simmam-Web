@@ -1,4 +1,5 @@
 import { Facebook, Globe, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { eventsRedirectHref } from "@/lib/navRedirects";
 import { LionEmblem } from "./LionEmblem";
 
 export function Footer() {
@@ -71,7 +72,7 @@ export function Footer() {
                   <a
                     href={
                       l === "Events"
-                        ? "/events"
+                        ? eventsRedirectHref
                         : l === "Gallery"
                         ? "/#archive"
                         : `#${l.toLowerCase().replace(" ", "")}`

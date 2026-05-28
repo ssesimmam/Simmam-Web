@@ -2,19 +2,20 @@ import { useEffect, useState, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import simats from "@/assets/simats-logo.png";
 import { LionEmblem } from "./LionEmblem";
+import { dashboardRedirectHref, eventsRedirectHref } from "@/lib/navRedirects";
 
 /* ─────────────────────────────────────────────
    Link definitions
 ───────────────────────────────────────────── */
 const leftLinks = [
   { href: "/#home", label: "Home" },
-  { href: "/#dashboard", label: "Dashboard" },
+  { href: dashboardRedirectHref, label: "Dashboard" },
   { href: "/#teams", label: "Teams" },
   { href: "/#leaderboard", label: "SIMMAM'25" },
 ];
 
 const rightLinks = [
-  { href: "/events", label: "Events" },
+  { href: eventsRedirectHref, label: "Events" },
   { href: "/captains", label: "Crew" },
   { href: "/#archive", label: "Gallery" },
   { href: "/#contact", label: "Contact" },

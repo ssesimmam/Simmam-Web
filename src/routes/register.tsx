@@ -44,13 +44,13 @@ function RegisterPage() {
       <main className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-24 pb-16">
         {/* Back link */}
         <div className="w-full max-w-xl mb-8">
-          <Link
-            to="/events"
+          <a
+            href="https://live.ssesimmam.com/events"
             className="inline-flex items-center gap-2 text-xs tracking-[0.3em] text-gold/70 hover:text-gold transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             BACK TO EVENTS
-          </Link>
+          </a>
         </div>
 
         {/* Card */}
@@ -105,13 +105,13 @@ function RegisterPage() {
           </div>
 
           {/* Back CTA */}
-          <Link
-            to="/events"
+          <a
+            href="https://live.ssesimmam.com/events"
             className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-sm font-bold glass border border-gold/30 text-gold hover:bg-gold/10 transition-all"
           >
             <ArrowLeft className="w-4 h-4" />
             Explore More Events
-          </Link>
+          </a>
         </div>
       </main>
 
