@@ -1,4 +1,3 @@
-import type { SyntheticEvent } from "react";
 import { Calendar, Crown, Music2, Trophy, Users } from "lucide-react";
 import { SectionHeader } from "./Dashboard";
 import { Tilt3D } from "./Tilt3D";
@@ -15,19 +14,6 @@ type Edition = {
   images: string[];
   accent: string;
 };
-
-const fallbackGalleryImage = "/gallery/stage-fireworks.jpeg";
-
-function handleGalleryImageError(event: SyntheticEvent<HTMLImageElement, Event>) {
-  const image = event.currentTarget;
-
-  if (image.dataset.fallbackApplied === "true") {
-    return;
-  }
-
-  image.dataset.fallbackApplied = "true";
-  image.src = fallbackGalleryImage;
-}
 
 const editions: Edition[] = [
   {
@@ -46,9 +32,9 @@ const editions: Edition[] = [
     ],
     images: [
       "/gallery/stage-fireworks.jpeg",
-      "/gallery/2025-1.png",
-      "/gallery/2025-5.png",
-      "/gallery/2025-6.png",
+      "https://images.squarespace-cdn.com/content/v1/590ecdedc534a56c75a1aab7/1758650536012-OUK3BX19A6XIKHYMXQIN/WhatsApp+Image+2025-09-11+at+7.47.38+PM+%281%29.jpeg?format=500w",
+      "https://images.squarespace-cdn.com/content/v1/590ecdedc534a56c75a1aab7/1758650722014-ZREEGBY3YYY9VC36BU7W/WhatsApp+Image+2025-09-11+at+7.47.49+PM+%282%29.jpeg?format=500w",
+      "https://images.squarespace-cdn.com/content/v1/590ecdedc534a56c75a1aab7/1758650902469-UU45JJI7X199RDQ3KMNK/WhatsApp+Image+2025-09-11+at+7.47.52+PM+%285%29.jpeg?format=500w",
       "/gallery/2025-upload-2.jpeg",
     ],
     accent: "oklch(0.78 0.16 80)",
@@ -69,9 +55,9 @@ const editions: Edition[] = [
     ],
     images: [
       "/gallery/2025-upload-1.jpeg",
-      "/gallery/2024-1.jpg",
-      "/gallery/2025-5.png",
-      "/gallery/2025-6.png",
+      "https://images.squarespace-cdn.com/content/v1/590ecdedc534a56c75a1aab7/1742960140095-H4HNUVWP5T7KYK2A0H9B/1Y2A9377-M.jpg?format=500w",
+      "https://images.squarespace-cdn.com/content/v1/590ecdedc534a56c75a1aab7/1742960067073-BEPGO2L3PPN6L0HEH0RX/DJI_0044-M.jpg?format=500w",
+      "https://images.squarespace-cdn.com/content/v1/590ecdedc534a56c75a1aab7/1742960368154-AQB0RTXM900XMULYEFX1/IMG_0978-M.jpg?format=500w",
       "/gallery/2024-1.jpg",
     ],
     accent: "oklch(0.62 0.27 25)",
@@ -190,7 +176,6 @@ export function PastYears() {
                         src={src}
                         alt={`SIMMAM ${e.year} memory ${i + 1}`}
                         loading="lazy"
-                        onError={handleGalleryImageError}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
