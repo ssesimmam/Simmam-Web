@@ -28,6 +28,17 @@ try {
     mkdirSync(join(FN_DIR, "node_modules", "@tanstack"), { recursive: true });
     cpSync(topRouterCore, targetRouterCore, { recursive: true, force: true });
   }
+  // Also ensure nested copy under @tanstack/react-router/node_modules so
+  // imports that resolve from that path find the same runtime implementation.
+  try {
+    const nestedTarget = join(FN_DIR, "node_modules", "@tanstack", "react-router", "node_modules", "@tanstack", "router-core");
+    mkdirSync(join(FN_DIR, "node_modules", "@tanstack", "react-router", "node_modules", "@tanstack"), { recursive: true });
+    if (existsSync(topRouterCore)) {
+      cpSync(topRouterCore, nestedTarget, { recursive: true, force: true });
+    }
+  } catch (e) {
+    // non-fatal
+  }
 } catch (e) {
   console.warn("Could not copy @tanstack/router-core into function node_modules:", e.message || e);
 }
