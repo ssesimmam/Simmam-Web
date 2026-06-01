@@ -19,6 +19,30 @@ if (existsSync(OUTPUT)) {
 mkdirSync(STATIC, { recursive: true });
 mkdirSync(FN_DIR, { recursive: true });
 
+// Ensure a single copy of @tanstack/router-core is available to the function
+// This prevents nested copies under @tanstack/react-router/node_modules
+try {
+  const topRouterCore = join(process.cwd(), "node_modules", "@tanstack", "router-core");
+  const targetRouterCore = join(FN_DIR, "node_modules", "@tanstack", "router-core");
+  if (existsSync(topRouterCore)) {
+    mkdirSync(join(FN_DIR, "node_modules", "@tanstack"), { recursive: true });
+    cpSync(topRouterCore, targetRouterCore, { recursive: true, force: true });
+  }
+  // Also ensure nested copy under @tanstack/react-router/node_modules so
+  // imports that resolve from that path find the same runtime implementation.
+  try {
+    const nestedTarget = join(FN_DIR, "node_modules", "@tanstack", "react-router", "node_modules", "@tanstack", "router-core");
+    mkdirSync(join(FN_DIR, "node_modules", "@tanstack", "react-router", "node_modules", "@tanstack"), { recursive: true });
+    if (existsSync(topRouterCore)) {
+      cpSync(topRouterCore, nestedTarget, { recursive: true, force: true });
+    }
+  } catch (e) {
+    // non-fatal
+  }
+} catch (e) {
+  console.warn("Could not copy @tanstack/router-core into function node_modules:", e.message || e);
+}
+
 // 3. Write the routing config
 writeFileSync(
   join(OUTPUT, "config.json"),
@@ -82,11 +106,45 @@ execSync("npm install --production --ignore-scripts", {
   stdio: "inherit",
 });
 
+// After installation, overwrite any nested copies with the top-level router-core
+try {
+  const topRouterCore = join(process.cwd(), "node_modules", "@tanstack", "router-core");
+  const targetRouterCore = join(FN_DIR, "node_modules", "@tanstack", "router-core");
+  const nestedTarget = join(FN_DIR, "node_modules", "@tanstack", "react-router", "node_modules", "@tanstack", "router-core");
+  if (existsSync(topRouterCore)) {
+    cpSync(topRouterCore, targetRouterCore, { recursive: true, force: true });
+    mkdirSync(join(FN_DIR, "node_modules", "@tanstack", "react-router", "node_modules", "@tanstack"), { recursive: true });
+    cpSync(topRouterCore, nestedTarget, { recursive: true, force: true });
+  }
+} catch (e) {
+  console.warn("Post-install copy of @tanstack/router-core failed:", e.message || e);
+}
+
 // 8. Create the function entry point
 writeFileSync(
   join(FN_DIR, "index.mjs"),
   `import server from "./dist/server/server.js";
 import { Readable } from "node:stream";
+// Debug startup: detect router-core versions and presence of reserveStreamFastPath
+let __VERCEL_DEBUG__ = {};
+try {
+  try {
+    const pkg = await import('@tanstack/router-core/package.json', { assert: { type: 'json' } });
+    __VERCEL_DEBUG__.routerCoreVersion = pkg.default?.version || pkg.version || null;
+  } catch (e) {
+    __VERCEL_DEBUG__.routerCoreVersion = null;
+  }
+  try {
+    const rcSsr = await import('@tanstack/router-core/ssr/server');
+    __VERCEL_DEBUG__.rcSsrKeys = Object.keys(rcSsr).slice(0,50);
+    __VERCEL_DEBUG__.hasReserveStreamFastPath = !!(rcSsr.serverSsr && typeof rcSsr.serverSsr.reserveStreamFastPath === 'function');
+  } catch (e) {
+    __VERCEL_DEBUG__.rcSsrError = String(e);
+  }
+} catch (e) {
+  // ignore
+}
+console.log('VERCEL_RUNTIME_DEBUG', JSON.stringify(typeof __VERCEL_DEBUG__ !== 'undefined' ? __VERCEL_DEBUG__ : null));
 
 function normalizeHeaders(inputHeaders) {
   const headers = new Headers();
