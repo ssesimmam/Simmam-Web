@@ -101,7 +101,7 @@ writeFileSync(
 
 // 7. Install only runtime deps in the function directory
 console.log("▶ Installing runtime dependencies...");
-execSync("npm install --production --ignore-scripts", {
+execSync("npm install --production --ignore-scripts --legacy-peer-deps", {
   cwd: FN_DIR,
   stdio: "inherit",
 });
