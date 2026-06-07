@@ -60,7 +60,7 @@ function CaptainsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { name: "SURIYA B", role: "PRESIDENT", phone: "9345877019" },
-                { name: "Karthik K", role: "VICE PRESIDENT", phone: "9597164761" },
+                { name: "Karthik K", role: "VICE PRESIDENT", phone: "7695865453" },
                 { name: "Siri .N", role: "SECRETARY", phone: "8919385345" },
                 { name: "S. Mohamed Shemar", role: "TREASURER", phone: "7092811416" },
                 { name: "K. Nikhil", role: "JOINT SECRETARY", phone: "9110552253" },
@@ -93,19 +93,20 @@ function CaptainsPage() {
               </span>
               <span className="h-px w-10 bg-gradient-to-l from-transparent to-[var(--gold)]" />
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
               {[
                 { name: "Selvakumar K", role: "CULTURAL SECRETARY", phone: "7639072595" },
-                { name: "Ch.Manikanta Yadav", role: "SPORTS SECRETARY", phone: "9381808022" },
-                { name: "Ruso AR", role: "TECH SECRETARY", phone: "9751150111" },
+                { name: "Ruso AR", role: "SPORTS SECRETARY", phone: "9751150111" },
+                { name: "Mani Yadav", role: "SPORTS SECRETARY", phone: "9381808022" },
+                { name: "Mukesh S", role: "TECH SECRETARY", phone: "9789798584" },
                 { name: "Bharath S", role: "NON-TECH SECRETARY", phone: "6379206320" },
                 { name: "Suraj Alagupandi", role: "MEDIA SECRETARY", phone: "9843974396" },
                 { name: "Siva Visagar R", role: "EXTERNAL AFFAIRS SECRETARY", phone: "6380920806" },
-                { name: "HARIRAM J K", role: "PUBLICITY & MARKETING SECRETARY", phone: "7995421514" },
+                { name: "HARIRAM J K", role: "PUBLICITY & MARKETING SECRETARY", phone: "6383057071" },
                 { name: "Likitha", role: "HOSPITALITY SECRETARY", phone: "7995421514" },
                 { name: "D Navya Sree", role: "STUDENT AFFAIRS SECRETARY", phone: "9704200759" },
-                { name: "LINGESH KUMAR V", role: "DISCIPLINARY SECRETARY", phone: "7358614501" }
+                { name: "Lingesh", role: "DISCIPLINARY SECRETARY", phone: "7358614501" }
               ].map((member) => (
                 <div key={member.role} className="w-full">
                   <div className="relative glass rounded-2xl p-5 flex flex-col items-center justify-center text-center h-full border border-[#d4af37] hover:bg-white/5 transition-colors">
@@ -134,7 +135,7 @@ function CaptainsPage() {
               </span>
               <span className="h-px w-10 bg-gradient-to-l from-transparent to-[var(--gold)]" />
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
               {[
                 { name: "A GOPI", role: "CULTURAL HEAD", phone: "9629481967" },
@@ -142,9 +143,11 @@ function CaptainsPage() {
                 { name: "SUJITHA REDDY", role: "SPORTS HEAD (GIRLS)", phone: "8978841718" },
                 { name: "M.Thiruvelan", role: "INDOOR & ATHLETICS HEAD (BOYS)", phone: "7305850025" },
                 { name: "DIVYA TEJA", role: "INDOOR & ATHLETICS HEAD (GIRLS)", phone: "7396242468" },
-                { name: "Mukesh S", role: "TECH HEAD", phone: "8807835397" },
-                { name: "MADHAN S", role: "NON-TECH HEAD", phone: "7418458124" },
-                { name: "Sarah glady", role: "EXTERNAL AFFAIRS HEAD", phone: "8531037372" }
+                { name: "Dhanush O", role: "TECH HEAD", phone: "9843964434" },
+                { name: "MADHAN S", role: "NON-TECH HEAD", phone: "7448358124" },
+                { name: "Sarah glady", role: "EXTERNAL AFFAIRS HEAD", phone: "8531037372" },
+                { name: "Dhayanithi", role: "DISCIPLINARY HEAD", phone: "7904267593" },
+                { name: "Akash", role: "STUDENT AFFAIRS HEAD", phone: "6382271269" },
               ].map((member) => (
                 <div key={member.role} className="w-full">
                   <div className="relative glass rounded-2xl p-5 flex flex-col items-center justify-center text-center h-full border border-[#d4af37] hover:bg-white/5 transition-colors">
@@ -179,13 +182,13 @@ function CaptainsPage() {
               <Tilt3D key={h.short} max={6}>
                 <div
                   className="relative glass-strong rounded-3xl p-8 md:p-10 overflow-hidden h-full border transition-all duration-500 hover:shadow-2xl group"
-                  style={{ 
+                  style={{
                     background: `linear-gradient(135deg, ${h.accent}15 0%, transparent 100%), oklch(0.14 0.03 20 / 0.8)`,
                     borderColor: h.accent + "44",
                     boxShadow: `0 0 40px ${h.accent}15`
                   }}
                 >
-                  <div 
+                  <div
                     className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
                     style={{ background: h.gradient }}
                   />
@@ -243,7 +246,7 @@ function CaptainsPage() {
                     >
                       <img src={h.logo} alt={`${h.name} crest`} className={`w-full h-full object-contain ${h.isOriginalShape ? "drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]" : "p-2"} ${h.logoScale || "scale-125"}`} />
                     </div>
-                    
+
                     <div>
                       <div className="font-display text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
                         {h.name}
@@ -295,7 +298,7 @@ function CaptainsPage() {
               </span>
               <span className="h-px w-10 bg-gradient-to-l from-transparent to-[var(--gold)]" />
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-4">
               {[
                 { name: "Sasvanthu G", role: "Team Lead", phone: "+91 86108 73714" },
@@ -331,7 +334,7 @@ function CaptainsPage() {
               </span>
               <span className="h-px w-10 bg-gradient-to-l from-transparent to-[var(--gold)]" />
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-4">
               {[
                 { name: "Deepa preya H", role: "Support Team", phone: "+91 63691 18546" },
@@ -378,10 +381,10 @@ function PersonCard({
 }) {
 
   return (
-    <div 
+    <div
       className="relative glass rounded-2xl p-5 overflow-hidden flex flex-col justify-between border-white/5 hover:border-white/10 transition-colors group/person"
     >
-      <div 
+      <div
         className="absolute inset-0 opacity-0 group-hover/person:opacity-5 transition-opacity duration-500"
         style={{ background: gradient }}
       />
@@ -390,7 +393,7 @@ function PersonCard({
           {role.toUpperCase()}
         </div>
         <div className="font-bold text-white group-hover/person:text-gold transition-colors">{name}</div>
-        
+
         {phone && (
           <a
             href={`tel:${phone.replace(/\s/g, "")}`}
